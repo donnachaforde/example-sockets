@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
 	struct sockaddr_in socketAddress;
     ::memset(&socketAddress, 0, sizeof(struct sockaddr_in));
     socketAddress.sin_family = AF_INET;
-    socketAddress.sin_port = ::htons(nPortNumber);	// htons is used for 'network byte order'
+    socketAddress.sin_port = htons(nPortNumber);	// htons is used for 'network byte order'
     ::memcpy(&socketAddress.sin_addr, pHostInfo->h_addr_list[0], pHostInfo->h_length);
 
 	// make the conection
