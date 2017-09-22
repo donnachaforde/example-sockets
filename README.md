@@ -1,6 +1,19 @@
 # example-sockets
-Example of a socket client and server (Network/Berkley Sockets). 
+Example of a socket client and server for Unix/Linux/MacOS platforms (Network/Berkley Sockets). 
 
+### Supported Platforms
+The project will build and run on pretty much any Unix/Linux plaform, including Unix-derived platforms such as MacOS. I've built and run the demo on several platforms, most recently:
+
+* Solaris SVR4
+* MacOS
+* Cygwin
+
+Note: For Windows users, this is an example of Unix/Berkley Sockets. WinSock is the windows equivalent, which is very similar but not quite the same. Hence, should you want to build and run this on Windows, consider a suitable development environment such as MinGW or Cygwin. 
+
+### Requirements
+The project build needs:
+* make
+* gcc (2.9.5 onwards)
 
 ### Building the project
 Use 'make'
