@@ -1,4 +1,4 @@
-# example-socket
+# example-sockets
 Example of a socket client and server (Network/Berkley Sockets). 
 
 
