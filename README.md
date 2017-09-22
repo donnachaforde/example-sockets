@@ -20,7 +20,7 @@ The server will report that it's completed initialization and is listening for c
     
 Next, run the client, passing in a unique (unused) port number:
 
-    $ client -pn 123456
+    $ client -pn 12346
 
 The server will print the structured message received from the client, and then continue to listen for the next connection. 
 
