@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# macOS system files
+.DS_Store
+
+# project  binaries
+Client
+Server
