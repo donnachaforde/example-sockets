@@ -80,9 +80,9 @@ int main(int argc, char* argv[])
     socketAddress.sin_family = AF_INET;
     socketAddress.sin_port = htons(nPortNumber);	// htons is used for 'network byte order'
 	
-	// use the wildcard address.
+	// use the wildcard address.ß
     int iNetworkAddr = INADDR_ANY;
-    ::memcpy(&socketAddress.sin_addr, &iNetworkAddr, sizeof(long));
+    ::memcpy(&socketAddress.sin_addr, &iNetworkAddr, sizeof(socketAddress.sin_addr));
 
 	 
 	// bind the socket to the address.
