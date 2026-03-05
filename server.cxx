@@ -218,6 +218,6 @@ bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFile
 	::strcpy(szServiceFilename, pchToken);
 
 	// return true if we have valid strings
-	return ( (szMACAddress != NULL) && (szMACAddress[0] != NULL) && (szServiceFilename != NULL) && (szServiceFilename[0] != NULL) );
+	return ( (szMACAddress != NULL) && (szMACAddress[0] != '\0') && (szServiceFilename != NULL) && (szServiceFilename[0] != '\0') );
 }
 
