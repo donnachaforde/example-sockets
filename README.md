@@ -4,9 +4,12 @@ Example of a socket client and server for Unix/Linux/macOS platforms (Network/Be
 ### Supported Platforms
 The project will build and run on pretty much any Unix/Linux platform, including Unix-derived platforms such as macOS. I've built and run the demo on several platforms, most recently:
 
-* Solaris SVR4
+
 * macOS
-* Cygwin
+* Ubuntu Linux
+* Cygwin on Windows
+
+Originally, the project was built on Solaris SVR4. 
 
 Note: For Windows users, this is an example of Unix/Berkley Sockets. WinSock is the windows equivalent, which is very similar but not quite the same. Hence, should you want to build and run this on Windows, consider a suitable development environment such as MinGW or Cygwin. 
 
