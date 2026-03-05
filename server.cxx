@@ -109,6 +109,8 @@ int main(int argc, char* argv[])
         ::exit(-1);
     }
 
+	int nConnectionCount = 0;
+
 	for ( ; ; )
 	{
 		// accept a connection
@@ -120,7 +122,8 @@ int main(int argc, char* argv[])
 			::exit(-1);
 		}
 		
-		::fprintf(stdout, "INFO: Client connection accepted.\n");
+		nConnectionCount++;
+		::fprintf(stdout, "INFO: Client connection accepted. [Connection Counter: %d]\n", nConnectionCount);
 
     
 		char szBuffer[1024];
@@ -135,7 +138,6 @@ int main(int argc, char* argv[])
 			{
 				// string terminate the buffer
 				szBuffer[iReceiveSize] = '\0';
-
 				::fprintf(stdout, "INFO: Msg from client received.\n");
 
 				// extract the values we're expecting
@@ -148,7 +150,7 @@ int main(int argc, char* argv[])
 				if (IsOkay)
 				{
 					// print what we have
-					::fprintf(stdout, "\t[MACAddress: %s] [Service Filename: %s]\n", szMACAddress, szServiceFilename);
+					::fprintf(stdout, "--> [MACAddress: %s] [Service Filename: %s]\n", szMACAddress, szServiceFilename);
 
 					// report success
 					::strcpy(szBuffer, "0");
