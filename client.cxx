@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 		::perror("send");
 		::exit(1);
 	}
-	::fprintf(stdout, "INFO: Msg successfully sent to server.");
+	::fprintf(stdout, "INFO: Msg successfully sent to server.\n");
 
 
 	//
