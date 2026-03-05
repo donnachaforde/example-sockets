@@ -2,7 +2,7 @@
 Example of a socket client and server for Unix/Linux/macOS platforms (Network/Berkley Sockets). 
 
 ### Supported Platforms
-The project will build and run on pretty much any Unix/Linux plaform, including Unix-derived platforms such as macOS. I've built and run the demo on several platforms, most recently:
+The project will build and run on pretty much any Unix/Linux platform, including Unix-derived platforms such as macOS. I've built and run the demo on several platforms, most recently:
 
 * Solaris SVR4
 * macOS
@@ -20,7 +20,7 @@ Use 'make'
 
     $./make
 
-Depending on your environement, you may need to explicity include or explicity exclude the linker directives that pull in the required network libraries. There are a few versions of the Makefile in the directory so choose the one most suitable to your environment. 
+Depending on your environment, you may need to explicitly include or explicitly exclude the linker directives that pull in the required network libraries. There are a few versions of the Makefile in the directory so choose the one most suitable to your environment. 
 
 The project creates two binaries, namely 'client' and 'server', representing either end of a client/server socket.
 
