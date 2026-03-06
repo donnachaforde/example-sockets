@@ -1,4 +1,16 @@
-// Socket client
+/******************************************************************************
+ * @file        client.cxx
+ * @brief       A simple socket client example (Unix/Berkeley Sockets).
+ *
+ * @author      Donnacha Forde
+ * @date        December 2001
+ * @revised     March 2026
+ * @copyright   Donnacha Forde. All rights reserved.
+ *
+ * @platform    Unix/Linux/macOS
+ * @notes       Connects to a socket server and sends a structured message.
+ *              Usage: client --port <PortNumber>
+ ******************************************************************************/
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -32,12 +44,12 @@ int main(int argc, char* argv[])
 	{
 		::fprintf(stdout, "ERROR: Insufficient number of parameters!\n");
 		::fprintf(stdout, "Usage:\n");
-		::fprintf(stdout, "client -pn <PortNumber>\n");
+		::fprintf(stdout, "client --port <PortNumber>\n");
 		return -1;
 	}
 	else
 	{
-		if (::strcmp(argv[1], "-pn") == 0)
+		if (::strcmp(argv[1], "--port") == 0)
 		{
 			nPortNumber = ::atoi(argv[2]);
 		}
