@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 
 	::fprintf(stdout, "INFO: Resolving Host='localhost'...\n");
 
-	char* szHostname = "localhost";
+	const char* szHostname = "localhost";
 	struct hostent* pHostInfo = ::gethostbyname(szHostname);
 
 	if (pHostInfo == NULL) 
@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
 
 	// send something to the server
 	::fprintf(stdout, "INFO: Sending msg to the server...\n");
-	char* szMessage = "12345678901234567|servicefilename.ext";
+	const char* szMessage = "12345678901234567|servicefilename.ext";
 	iRetCode = ::send(iSockDscrptr, szMessage, strlen(szMessage), 0);
 	
 	if (iRetCode < 0) 
