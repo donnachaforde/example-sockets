@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
     socketAddress.sin_port = htons(nPortNumber);	// htons is used for 'network byte order'
     ::memcpy(&socketAddress.sin_addr, pHostInfo->h_addr_list[0], pHostInfo->h_length);
 
-	// make the conection
+	// make the connection
 	int iRetCode = ::connect(iSockDscrptr, (struct sockaddr *) &socketAddress, sizeof(struct sockaddr_in));
     if (iRetCode < 0) 
 	{
