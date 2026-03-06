@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
 
 	// send something to the server
 	::fprintf(stdout, "INFO: Sending msg to the server...\n");
-	const char* szMessage = "12345678901234567|servicefilename.ext";
+	const char* szMessage = "DE:AD:BE:EF:CA:FE|network-monitor.service";
 	iRetCode = ::send(iSockDscrptr, szMessage, strlen(szMessage), 0);
 	
 	if (iRetCode < 0) 
