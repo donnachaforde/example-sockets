@@ -5,7 +5,9 @@
  * @author      Donnacha Forde
  * @date        December 2001
  * @revised     March 2026
- * @copyright   Donnacha Forde. All rights reserved.
+ * @copyright   Copyright 2001 Donnacha Forde
+ * @license     Apache License, Version 2.0
+ *              https://www.apache.org/licenses/LICENSE-2.0
  *
  * @platform    Unix/Linux/macOS
  * @notes       Accepts connections sequentially on a specified port.
