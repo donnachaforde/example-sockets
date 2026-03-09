@@ -54,6 +54,5 @@ dkms.conf
 # macOS system files
 .DS_Store
 
-# project  binaries
-Client
-Server
+# project binaries
+build/
