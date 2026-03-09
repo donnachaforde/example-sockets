@@ -22,21 +22,13 @@ The project build needs:
 Use `make` to build both client and server:
 ```
 $ make
-```
-Or
-```
+# or
 $ make all
 ```
 
-
-
-To build the client:
+To build separately:
 ```
 $ make client
-```
-
-To build the server:
-```
 $ make server
 ```
 
