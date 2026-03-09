@@ -38,14 +38,14 @@ The project creates two binaries, namely `client` and `server`, representing eit
 ## Running the example
 First, run the server, passing in a unique (unused) port number:
 ```
-$ ./build/server --port 12346
+$ ./build/server --port 12345
 ```
 
 The server will report that it's completed initialization and is listening for client connections.
     
 Next, run the client, passing in the same port number:
 ```
-$ ./build/client --port 12346
+$ ./build/client --port 12345
 ```
 
 The client will connect to the server and send a structured message before exiting. The server will print the structured message received from the client, and then continue to listen for the next connection. 
