@@ -96,7 +96,9 @@ int main(int argc, char* argv[])
         ::exit(1);
     }
 
-	::fprintf(stdout, "INFO: Host='%s' successfully resolved to %s.\n", szHostname, ::inet_ntoa(*(struct in_addr*)pHostInfo->h_addr_list[0]));
+	char szServerIP[INET_ADDRSTRLEN];
+	inet_ntop(AF_INET, pHostInfo->h_addr_list[0], szServerIP, sizeof(szServerIP));
+	::fprintf(stdout, "INFO: Host='%s' successfully resolved to %s.\n", szHostname, szServerIP);
 
 	 
 
@@ -134,12 +136,34 @@ int main(int argc, char* argv[])
 
 
 	//
+	// Resolve the client's own hostname and IP address
+	//
+
+	char szClientHostname[256];
+	if (::gethostname(szClientHostname, sizeof(szClientHostname)) < 0)
+	{
+		::perror("gethostname");
+		::exit(1);
+	}
+
+	char szClientIP[INET_ADDRSTRLEN] = "unknown";
+	struct hostent* pClientHostInfo = ::gethostbyname(szClientHostname);
+	if (pClientHostInfo != NULL)
+	{
+		inet_ntop(AF_INET, pClientHostInfo->h_addr_list[0], szClientIP, sizeof(szClientIP));
+	}
+
+	::fprintf(stdout, "INFO: Client hostname='%s', IP='%s'.\n", szClientHostname, szClientIP);
+
+
+	//
 	// Send a request
 	//
 
 	// send something to the server
 	::fprintf(stdout, "INFO: Sending msg to the server...\n");
-	const char* szMessage = "DE:AD:BE:EF:CA:FE|network-monitor.service";
+	char szMessage[1024];
+	::snprintf(szMessage, sizeof(szMessage), "DE:AD:BE:EF:CA:FE|network-monitor.service|%s|%s", szClientHostname, szClientIP);
 	iRetCode = ::send(iSockDscrptr, szMessage, strlen(szMessage), 0);
 	
 	if (iRetCode < 0) 
