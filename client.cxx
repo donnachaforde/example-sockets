@@ -23,6 +23,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 
 
 
@@ -95,7 +96,7 @@ int main(int argc, char* argv[])
         ::exit(1);
     }
 
-	::fprintf(stdout, "INFO: Host='%s' successfully resolved.\n", szHostname);
+	::fprintf(stdout, "INFO: Host='%s' successfully resolved to %s.\n", szHostname, ::inet_ntoa(*(struct in_addr*)pHostInfo->h_addr_list[0]));
 
 	 
 
