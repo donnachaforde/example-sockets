@@ -11,7 +11,7 @@
  *
  * @platform    Unix/Linux/macOS
  * @notes       Connects to a socket server and sends a structured message.
- *              Usage: client --port <PortNumber>
+ *              Usage: client --port <PortNumber> [--host <Hostname>]
  ******************************************************************************/
 
 #include <stdlib.h>
@@ -37,29 +37,45 @@
 int main(int argc, char* argv[])
 {
 	//
-	// First, parse command args - get the port number
+	// First, parse command args - get the port number and optional host
 	//
 
-	// rudimentary form of arg checking
 	int nPortNumber = 0;
-	if (argc != 3)
+	const char* szHostname = "localhost";
+
+	for (int i = 1; i < argc; i++)
 	{
-		::fprintf(stdout, "ERROR: Insufficient number of parameters!\n");
-		::fprintf(stdout, "Usage:\n");
-		::fprintf(stdout, "client --port <PortNumber>\n");
-		return -1;
-	}
-	else
-	{
-		if (::strcmp(argv[1], "--port") == 0)
+		if (::strcmp(argv[i], "--port") == 0)
 		{
-			nPortNumber = ::atoi(argv[2]);
+			if (i + 1 >= argc)
+			{
+				::fprintf(stderr, "ERROR: --port requires an argument.\n");
+				return -1;
+			}
+			nPortNumber = ::atoi(argv[++i]);
+		}
+		else if (::strcmp(argv[i], "--host") == 0)
+		{
+			if (i + 1 >= argc)
+			{
+				::fprintf(stderr, "ERROR: --host requires an argument.\n");
+				return -1;
+			}
+			szHostname = argv[++i];
 		}
 		else
 		{
-			::fprintf(stdout, "ERROR: Invalid switch!\n");
+			::fprintf(stderr, "ERROR: Unknown switch '%s'.\n", argv[i]);
+			::fprintf(stderr, "Usage: client --port <PortNumber> [--host <Hostname>]\n");
 			return -1;
 		}
+	}
+
+	if (nPortNumber == 0)
+	{
+		::fprintf(stderr, "ERROR: --port is required.\n");
+		::fprintf(stderr, "Usage: client --port <PortNumber> [--host <Hostname>]\n");
+		return -1;
 	}
 
 	::fprintf(stdout, "INFO: Client started.\n");
@@ -69,18 +85,17 @@ int main(int argc, char* argv[])
 	// Resolve our host's network address
 	//
 
-	::fprintf(stdout, "INFO: Resolving Host='localhost'...\n");
+	::fprintf(stdout, "INFO: Resolving Host='%s'...\n", szHostname);
 
-	const char* szHostname = "localhost";
 	struct hostent* pHostInfo = ::gethostbyname(szHostname);
 
-	if (pHostInfo == NULL) 
+	if (pHostInfo == NULL)
 	{
         ::fprintf(stderr, "ERROR: Unknown host=%s.\n", szHostname);
         ::exit(1);
     }
 
-	::fprintf(stdout, "INFO: Host='localhost' successfully resolved.\n");
+	::fprintf(stdout, "INFO: Host='%s' successfully resolved.\n", szHostname);
 
 	 
 
