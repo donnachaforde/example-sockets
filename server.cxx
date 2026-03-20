@@ -20,6 +20,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -94,7 +95,7 @@ int main(int argc, char* argv[])
     socketAddress.sin_family = AF_INET;
     socketAddress.sin_port = htons(nPortNumber);	// htons is used for 'network byte order'
 	
-	// use the wildcard address.ß
+	// use the wildcard address
     int iNetworkAddr = INADDR_ANY;
     ::memcpy(&socketAddress.sin_addr, &iNetworkAddr, sizeof(socketAddress.sin_addr));
 
@@ -137,7 +138,10 @@ int main(int argc, char* argv[])
 		}
 		
 		nConnectionCount++;
-		::fprintf(stdout, "INFO: Client connection accepted. [Connection Counter: %d]\n", nConnectionCount);
+		char szClientIP[INET_ADDRSTRLEN];
+		inet_ntop(AF_INET, &socketAddress.sin_addr, szClientIP, sizeof(szClientIP));
+		int nClientPort = ntohs(socketAddress.sin_port);
+		::fprintf(stdout, "INFO: Client connection accepted from %s:%d [Connection Counter: %d]\n", szClientIP, nClientPort, nConnectionCount);
 
     
 		char szBuffer[1024];
