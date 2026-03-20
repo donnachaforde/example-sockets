@@ -28,7 +28,7 @@
 
 
 
-bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFilename);
+bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFilename, char* szClientHostname, char* szClientIP);
 
 
 
@@ -156,12 +156,15 @@ int main(int argc, char* argv[])
 			{
 				// string terminate the buffer
 				szBuffer[iReceiveSize] = '\0';
-				::fprintf(stdout, "INFO: Msg from client received.\n");
 
 				// extract the values we're expecting
 				char szMACAddress[17 + 1];
 				char szServiceFilename[255 + 1];
-				bool IsOkay = ExtractStringValues(szBuffer, szMACAddress, szServiceFilename);
+				char szClientHostname[256];
+				char szClientIP[INET_ADDRSTRLEN];
+				bool IsOkay = ExtractStringValues(szBuffer, szMACAddress, szServiceFilename, szClientHostname, szClientIP);
+
+				::fprintf(stdout, "INFO: Msg from client received. (Host=%s, IP=%s)\n", szClientHostname, szClientIP);
 
 	
 				// acknowledge receipt
@@ -208,13 +211,15 @@ int main(int argc, char* argv[])
 
 
 
-bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFilename)
+bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFilename, char* szClientHostname, char* szClientIP)
 {
-	assert((szBuffer != NULL) && (szMACAddress != NULL) && (szServiceFilename != NULL));
-	
+	assert((szBuffer != NULL) && (szMACAddress != NULL) && (szServiceFilename != NULL) && (szClientHostname != NULL) && (szClientIP != NULL));
+
 	// initialise the out params
 	::strcpy(szMACAddress, "");
 	::strcpy(szServiceFilename, "");
+	::strcpy(szClientHostname, "");
+	::strcpy(szClientIP, "");
 
 	// extract the strings
 	char* pchToken = ::strtok(szBuffer, "|");
@@ -226,8 +231,7 @@ bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFile
 
 	// copy out the MACAddress
 	::strcpy(szMACAddress, pchToken);
-	
-	
+
 	pchToken = ::strtok(NULL, "|");
 	if (pchToken == NULL)
 	{
@@ -237,7 +241,19 @@ bool ExtractStringValues(char* szBuffer, char* szMACAddress, char* szServiceFile
 	// copy out the Service Filename
 	::strcpy(szServiceFilename, pchToken);
 
+	pchToken = ::strtok(NULL, "|");
+	if (pchToken != NULL)
+	{
+		::strcpy(szClientHostname, pchToken);
+	}
+
+	pchToken = ::strtok(NULL, "|");
+	if (pchToken != NULL)
+	{
+		::strcpy(szClientIP, pchToken);
+	}
+
 	// return true if we have valid strings
-	return ( (szMACAddress != NULL) && (szMACAddress[0] != '\0') && (szServiceFilename != NULL) && (szServiceFilename[0] != '\0') );
+	return ( (szMACAddress[0] != '\0') && (szServiceFilename[0] != '\0') );
 }
 
