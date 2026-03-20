@@ -48,7 +48,10 @@ Next, run the client, passing in the same port number:
 $ ./build/client --port 12345
 ```
 
-The client will connect to the server and send a structured message before exiting. The server will print the structured message received from the client, and then continue to listen for the next connection. 
+The client defaults to `localhost` as the target host. To connect to a remote server, pass the `--host` argument:
+```
+$ ./build/client --port 12345 --host <hostname-or-ip>
+```
 
-For the purpose of keeping the demo simple, `localhost` has been hardcoded as the target host. Ensure you run both the client and server on the same host.
+The client will connect to the server and send a structured message before exiting. The server will print the structured message received from the client, and then continue to listen for the next connection.
  
